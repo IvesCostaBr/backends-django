@@ -1,19 +1,19 @@
 from rest_framework import serializers
-from .models import Venda, Item
+from .models import List, Item
 
 
 
 #oque sera exibido na api
-class ItemSerializer(serializers.HyperlinkedModelSerializer):
+class ItemSeializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Item
-        felds = ['id' ,'nome_items']
-        exclude = ['venda']
+        fields = ['id', 'name', 'done']
 
 
-class VendaSerializer(serializers.HyperlinkedModelSerializer):
-    item_set = ItemSerializer(many=True)
+class ListSerializer(serializers.HyperlinkedModelSerializer):
+    item_set = ItemSeializer(many=True)
+
     class Meta:
-        model = Venda
-        fields = ('id' ,'owner', 'code', 'status', 'url', 'item_set')
+        model = List
+        fields = ['id', 'name', 'owner', 'url', 'item_set']
 

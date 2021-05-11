@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Venda, Item
+from .models import List, Item
 # Register your models here.
-admin.site.register(Venda)
+admin.site.register(List)
 admin.site.register(Item)

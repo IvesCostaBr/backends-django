@@ -1,23 +1,22 @@
 from django.shortcuts import render
 from rest_framework import viewsets
+#from django.shortcuts import HttpResponse
 from rest_framework import permissions, authentication
-from .models import Venda, Item
-from .serializers import VendaSerializer, ItemSerializer
-# Create your views here.
+from .models import List, Item
+from .serializers import ListSerializer, ItemSeializer
 
-
-#as views que vao ser executadas quando entrar no endpoint
-class VendaView(viewsets.ModelViewSet):
-
-    queryset = Venda.objects.all()
-    serializer_class = VendaSerializer
+class ListView(viewsets.ModelViewSet):
+    serializer_class = ListSerializer
     permission_classes = [permissions.IsAuthenticated]
-    authentication_classes = [authentication.TokenAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
+
+    def get_queryset(self):
+        user = self.request.user 
+        return List.objects.filter(owner=user)
 
 
-
-class ItemViewSet(viewsets.ModelViewSet):
+class ItemView(viewsets.ModelViewSet):
     queryset = Item.objects.all()
-    serializer_class = ItemSerializer
+    serializer_class = Item
     permission_classes = [permissions.IsAuthenticated]
-    authentication_classes = [authentication.TokenAuthentication]
+    authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
