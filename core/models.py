@@ -15,3 +15,4 @@ class Item(models.Model):
     
     def __str__(self):
         return str(self.nome_items)
+    
