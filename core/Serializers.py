@@ -4,14 +4,14 @@ from .models import List, Item
 
 
 #oque sera exibido na api
-class ItemSeializer(serializers.HyperlinkedModelSerializer):
+class ItemSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Item
         fields = ['id', 'name', 'done']
 
 
 class ListSerializer(serializers.HyperlinkedModelSerializer):
-    item_set = ItemSeializer(many=True)
+    item_set = ItemSerializer(many=True)
 
     class Meta:
         model = List

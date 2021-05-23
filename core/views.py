@@ -1,9 +1,8 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-#from django.shortcuts import HttpResponse
 from rest_framework import permissions, authentication
 from .models import List, Item
-from .serializers import ListSerializer, ItemSeializer
+from .Serializers import ListSerializer, ItemSerializer
 
 class ListView(viewsets.ModelViewSet):
     serializer_class = ListSerializer
@@ -17,6 +16,6 @@ class ListView(viewsets.ModelViewSet):
 
 class ItemView(viewsets.ModelViewSet):
     queryset = Item.objects.all()
-    serializer_class = Item
+    serializer_class = ItemSerializer
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = [authentication.TokenAuthentication, authentication.SessionAuthentication]
